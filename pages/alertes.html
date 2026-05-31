@@ -1,0 +1,87 @@
+<!-- ALERTES -->
+<div class="page-title">🔔 Alertes prix</div>
+
+<!-- CRÉER UNE ALERTE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">➕ Nouvelle Alerte</div>
+  </div>
+  <div class="alerte-form">
+
+    <div class="calc-label">Métal</div>
+    <select id="alerteMetal" class="alerte-select">
+      <option value="Or">⬡ Or</option>
+      <option value="Argent">◈ Argent</option>
+    </select>
+
+    <div class="calc-label">Condition</div>
+    <select id="alerteType" class="alerte-select">
+      <option value="above">▲ Au dessus de</option>
+      <option value="below">▼ En dessous de</option>
+    </select>
+
+    <div class="calc-label">Prix seuil (XAF/g)</div>
+    <input
+      type="number"
+      id="alertePrix"
+      class="alerte-input"
+      placeholder="Ex: 90000"
+      min="0"
+    />
+
+    <button class="alerte-btn" onclick="addAlerte()" type="button">
+      🔔 Créer l'alerte
+    </button>
+
+  </div>
+</div>
+
+<!-- ALERTES ACTIVES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">📋 Alertes Actives</div>
+  </div>
+  <div class="alerte-list" id="alerteList">
+    <div class="alerte-vide">Aucune alerte configurée</div>
+  </div>
+</div>
+
+<!-- COMMENT ÇA MARCHE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">💡 Comment ça marche</div>
+  </div>
+  <div style="padding:16px;display:flex;flex-direction:column;gap:10px">
+    <div style="display:flex;gap:12px;align-items:flex-start">
+      <span style="font-size:20px">1️⃣</span>
+      <div>
+        <div style="font-weight:bold;font-size:13px;color:#1a2744">Définir un seuil</div>
+        <div style="font-size:12px;color:#666">Choisissez un métal et un prix seuil en XAF/g</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start">
+      <span style="font-size:20px">2️⃣</span>
+      <div>
+        <div style="font-weight:bold;font-size:13px;color:#1a2744">Actualiser les prix</div>
+        <div style="font-size:12px;color:#666">Appuyez sur ⟳ en haut — l'app vérifie vos alertes</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start">
+      <span style="font-size:20px">3️⃣</span>
+      <div>
+        <div style="font-weight:bold;font-size:13px;color:#1a2744">Badge rouge 🔔</div>
+        <div style="font-size:12px;color:#666">Un badge rouge apparaît si une alerte est déclenchée</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BANNIÈRE PUB -->
+<a href="https://omar-gold-and-gems.vercel.app" target="_blank" class="banner-pub">
+  <div class="banner-pub-left">
+    <div class="banner-pub-title">⬡ OMAR GOLD & GEMS</div>
+    <div class="banner-pub-sub">Your Trusted Partner in Gold, Gems & Mining</div>
+    <div class="banner-pub-sub">📍 Gari Gombo — Est Cameroun</div>
+  </div>
+  <button class="banner-pub-btn">Visiter →</button>
+</a>

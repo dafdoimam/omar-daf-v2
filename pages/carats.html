@@ -1,0 +1,115 @@
+<!-- CARATS -->
+<div class="page-title">📊 Calculatrice pureté or</div>
+
+<!-- CALCULATRICE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">🔢 Calculatrice Or</div>
+  </div>
+  <div class="calc-box">
+
+    <div class="calc-label">Poids en grammes</div>
+    <div class="calc-input-row">
+      <input
+        type="number"
+        id="gramsInput"
+        placeholder="Ex: 10.5"
+        min="0"
+        step="0.01"
+      />
+      <span class="calc-unit">g</span>
+    </div>
+
+    <div class="calc-label">Pureté de l'or</div>
+    <div class="carat-buttons">
+      <button class="carat-btn active" onclick="selectCarat(this, 0.999)" type="button">24K</button>
+      <button class="carat-btn" onclick="selectCarat(this, 0.916)" type="button">22K</button>
+      <button class="carat-btn" onclick="selectCarat(this, 0.750)" type="button">18K</button>
+      <button class="carat-btn" onclick="selectCarat(this, 0.585)" type="button">14K</button>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()" type="button">
+      Calculer la valeur
+    </button>
+
+    <div id="calcResult" class="calc-result hidden">
+      <div class="result-row">
+        <span class="result-label">Valeur en USD</span>
+        <span id="resultUSD" class="result-value">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Valeur en FCFA</span>
+        <span id="resultXAF" class="result-value gold">—</span>
+      </div>
+      <div class="result-detail" id="resultDetail"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TABLEAU PURETÉS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">⬡ Prix par pureté — Or</div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Pureté</th>
+        <th>USD/g</th>
+        <th>XAF/g</th>
+      </tr>
+    </thead>
+    <tbody id="pureteTable">
+      <tr>
+        <td colspan="3" class="loading">
+          Actualisez l'accueil d'abord
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- BANNIÈRE PUB -->
+<a href="https://omar-gold-and-gems.vercel.app" target="_blank" class="banner-pub">
+  <div class="banner-pub-left">
+    <div class="banner-pub-title">⬡ OMAR GOLD & GEMS</div>
+    <div class="banner-pub-sub">Your Trusted Partner in Gold, Gems & Mining</div>
+    <div class="banner-pub-sub">📍 Gari Gombo — Est Cameroun</div>
+  </div>
+  <button class="banner-pub-btn">Visiter →</button>
+</a>
+
+<!-- CLAUSE -->
+<div class="clause">
+  ⚠️ Calculs basés sur le prix spot international.<br>
+  Le prix réel d'achat peut varier selon la qualité et le marché local.
+</div>
+
+<script>
+// Afficher tableau puretés si prix disponible
+(function() {
+  const puretés = [
+    { label: '24 carats (999)', facteur: 0.999 },
+    { label: '22 carats (916)', facteur: 0.916 },
+    { label: '18 carats (750)', facteur: 0.750 },
+    { label: '14 carats (585)', facteur: 0.585 },
+  ];
+
+  const tbody = document.getElementById('pureteTable');
+
+  if (goldPriceXAF > 0 && usdToXaf > 0) {
+    tbody.innerHTML = puretés.map(p => {
+      const xaf = goldPriceXAF * p.facteur;
+      const usd = xaf / usdToXaf;
+      return `
+        <tr>
+          <td><div class="metal-name">${p.label}</div></td>
+          <td>$${usd.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+          <td>${xaf.toLocaleString('fr-FR', {maximumFractionDigits: 0})} XAF</td>
+        </tr>
+      `;
+    }).join('');
+  }
+})();
+</script>
