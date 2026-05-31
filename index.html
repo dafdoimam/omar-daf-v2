@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGE - Omar Gold Exchange</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#111111">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="logo-area">
+            <span class="logo-text">OGE</span>
+        </div>
+        <div class="datetime-area">
+            <span id="current-date-time">Chargement...</span>
+        </div>
+        <div class="header-actions">
+            <button id="btn-refresh" class="btn-icon" title="Actualiser"><i class="fas fa-sync-alt"></i></button>
+            <select id="currency-selector" class="select-currency">
+                <option value="XAF">XAF</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="AED">AED</option>
+                <option value="SAR">SAR</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="app-content">
+
+        <section id="view-accueil" class="app-view active">
+            <div class="card">
+                <h3><i class="fas fa-cubes"></i> Métaux Précieux</h3>
+                <p class="update-label">Mise à jour à : <span class="time-stamp">--:--</span></p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Métal</th>
+                            <th>Prix</th>
+                            <th>Evol.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Or</strong></td>
+                            <td id="price-gold">--</td>
+                            <td id="trend-gold"><i class="fas fa-minus"></i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Argent</strong></td>
+                            <td id="price-silver">--</td>
+                            <td id="trend-silver"><i class="fas fa-minus"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ad-container">
+                <span class="ad-badge">Publicité</span>
+                <div id="oge-ad-space">
+                    <p style="color: #999; font-size: 12px;">Espace Publicitaire</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-money-bill-wave"></i> Devises (Valeur en XAF)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Devise</th>
+                            <th>Taux XAF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1 USD (Dollar US)</td><td id="rate-usd">--</td></tr>
+                        <tr><td>1 EUR (Euro)</td><td id="rate-eur">--</td></tr>
+                        <tr><td>1 GBP (Livre Sterling)</td><td id="rate-gbp">--</td></tr>
+                        <tr><td>1 AED (Dirham Émirati)</td><td id="rate-aed">--</td></tr>
+                        <tr><td>1 SAR (Riyal Saoudien)</td><td id="rate-sar">--</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3><i class="fab fa-bitcoin"></i> Cryptomonnaies</h3>
+                <p class="update-label">Mise à jour à : <span class="time-stamp">--:--</span></p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Crypto</th>
+                            <th>Prix</th>
+                            <th>Evol.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BTC</strong></td>
+                            <td id="price-btc">--</td>
+                            <td id="trend-btc"><i class="fas fa-minus"></i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ETH</strong></td>
+                            <td id="price-eth">--</td>
+                            <td id="trend-eth"><i class="fas fa-minus"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="view-alerte" class="app-view">
+            <div class="card">
+                <h3><i class="fas fa-bell"></i> Créer une Alerte</h3>
+                <div class="form-group">
+                    <label>Choisir un actif :</label>
+                    <select id="alert-asset">
+                        <option value="gold">Or</option>
+                        <option value="silver">Argent</option>
+                        <option value="btc">Bitcoin (BTC)</option>
+                        <option value="eth">Ethereum (ETH)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Prix cible (Inférieur ou égal à) :</label>
+                    <input type="number" id="alert-price" placeholder="Ex: 65">
+                </div>
+                <button class="btn-primary">Enregistrer l'alerte</button>
+            </div>
+        </section>
+
+        <section id="view-calculatrice" class="app-view">
+            <div class="card">
+                <h3><i class="fas fa-calculator"></i> Calculateur d'Or</h3>
+                <div class="form-group">
+                    <label>Pureté (Carats) :</label>
+                    <select id="calc-karat">
+                        <option value="24">24K (99.9%)</option>
+                        <option value="22">22K (91.6%)</option>
+                        <option value="21">21K (87.5%)</option>
+                        <option value="18">18K (75.0%)</option>
+                        <option value="custom">Personnalisé</option>
+                    </select>
+                </div>
+                <div class="form-group hidden" id="custom-karat-group">
+                    <label>Pureté personnalisée (%) :</label>
+                    <input type="number" id="calc-custom-purety" placeholder="Ex: 90">
+                </div>
+                <div class="form-group">
+                    <label>Poids en grammes (g) :</label>
+                    <input type="number" id="calc-weight" placeholder="Ex: 10">
+                </div>
+                <div class="result-box">
+                    <span>Valeur Estimée :</span>
+                    <strong id="calc-result">0.00 XAF</strong>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-actu" class="app-view">
+            <div class="card">
+                <h3><i class="fas fa-info-circle"></i> Sources & Partenariats</h3>
+                <p><strong>Omar Gold Exchange (OGE)</strong> s'engage à vous fournir des données de marché hautement transparentes et vérifiées.</p>
+                <h4>Sites & API exploités :</h4>
+                <ul>
+                    <li>Données Métaux : API financières internationales sécurisées.</li>
+                    <li>Données Cryptos : Flux mondiaux en temps réel (CoinGecko).</li>
+                </ul>
+                <hr>
+                <h4>Propositions de Partenariat</h4>
+                <p>Vous souhaitez afficher votre publicité sur notre application ou devenir un partenaire officiel d'OGE ? Contactez-nous directement.</p>
+                <a href="mailto:contact@omargoldexchange.com" class="btn-primary text-center" style="display: block; text-decoration: none;">Envoyer une demande</a>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="disclaimer-bar">
+        Clause de non-responsabilité : Les cours sont donnés à titre indicatif et peuvent présenter un décalage avec le marché physique.
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-target="view-accueil">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </button>
+        <button class="nav-item" data-target="view-alerte">
+            <i class="fas fa-bell"></i>
+            <span>Alerte</span>
+        </button>
+        <button class="nav-item" data-target="view-calculatrice">
+            <i class="fas fa-calculator"></i>
+            <span>Calculatrice</span>
+        </button>
+        <button class="nav-item" data-target="view-actu">
+            <i class="fas fa-newspaper"></i>
+            <span>Actu</span>
+        </button>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>
